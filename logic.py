@@ -6,34 +6,33 @@ from collections import defaultdict
 
 # Görev #5
 
-class TextAnalysis():   
-    
+questions = {
+    "adın ne?": "ben süper havalı bir botum ve amacım size yardım etmek!",
+    "kaç yaşındasın?": "bu çok felsefi bir soru..."
+}
+
+
+
+
+class TextAnalysis():
+
     # Görev #1
     memory = defaultdict(list)
 
-
-    
-
-    
-
     def __init__(self, text, owner):
-
-        
 
         # Görev #2
         TextAnalysis.memory[owner].append(self)
-
-
-
-        
 
         self.text = text
         self.translation = self.__translate(self.text, "tr", "en")
 
         # Görev #6
-        self.response = self.get_answer()
+        if self.text.lower() in questions.keys():
+            self.response = questions[self.text.lower()]
+        else:
+            self.response = self.get_answer()
 
-    
     def get_answer(self):
         res = self.__translate("I don't know how to help", "en", "tr")
         return res
